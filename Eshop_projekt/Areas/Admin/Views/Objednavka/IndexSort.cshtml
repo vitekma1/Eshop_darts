@@ -1,0 +1,78 @@
+﻿@using DataAccess.Model
+@using DataAccess.Dao;
+@model IList<Objednavka>
+
+@{
+    ViewBag.Title = "IndexSort";
+}
+
+<div class=" border border-dark m-2 p-2">
+    @{ int price = 0;}
+    @{string username;
+        username = User.Identity.Name;
+        EshopUzivatelDao eshopUzivatelDao = new EshopUzivatelDao();
+        EshopUzivatel eshopUzivatel = eshopUzivatelDao.GetByLogin(ViewBag.Login);}
+    <h2>Objednávka pro @eshopUzivatel.Login</h2>
+
+
+    <div>
+        <span class="font-weight-bold">Jméno zákazníka: </span> @eshopUzivatel.Jmeno
+    </div>
+    <div>
+    </div>
+    <div>
+        <span class="font-weight-bold">Přijmení zákazníka: </span> @eshopUzivatel.Prijmeni
+
+    </div>
+    <div>
+        <span class="font-weight-bold">Adresa zákazníka: </span> @eshopUzivatel.Adresa
+    </div>
+    <div>
+        <span class="font-weight-bold">PSC zákazníka: </span> @eshopUzivatel.PSC
+    </div>
+    <div>
+        <span class="font-weight-bold">Email zákazníka: </span> @eshopUzivatel.Email
+    </div>
+
+
+
+    @foreach (Objednavka objednavka in Model)
+    {
+        if (objednavka.Platnost == 1)
+        {
+            if (objednavka.eshopUzivatel.Login == eshopUzivatel.Login)
+            {
+
+
+                <div class=" border border-dark m-2 p-2">
+                    <span class="font-weight-bold">
+                        Číslo objednaného produktu #@objednavka.Id
+                    </span>
+                    <div>
+                        <span class="font-weight-bold">Název zboží: </span> @objednavka.zbozi.Nazev
+                    </div>
+                    <div>
+                        <span class="font-weight-bold"> Cena:</span>  @objednavka.Cena Kč
+                    </div>
+                    <div>
+                        <span class="font-weight-bold"> Počet kusů:</span>  @objednavka.Ks
+                    </div>
+                </div>
+                price = price + objednavka.zbozi.Cena * objednavka.Ks;
+                <a class="btn btn-sm btn-outline-secondary" href="@Url.Action("Odeslano", "Objednavka", new { id = objednavka.Id })">Zařadit mezi odeslané</a>
+
+            }
+        }
+    }
+    <div class="border border-dark  m-2 ">
+        <span class="font-weight-bold p-1">  Celková cena: @price Kč</span>
+    </div>
+
+    <a class="btn btn-sm btn-outline-secondary" href="@Url.Action("OdeslanoVse", "Objednavka", new { login = eshopUzivatel.Login })">Označit celou objednávku jako odeslanou</a>
+
+
+
+
+
+
+</div>

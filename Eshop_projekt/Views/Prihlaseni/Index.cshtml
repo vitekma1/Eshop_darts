@@ -1,0 +1,49 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../../../favicon.ico">
+
+    <title>OneHundredEighty</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="@Url.Content("~/Content/bootstrap.min.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Content/bootstrap-theme.min.css")" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="album.css" rel="stylesheet">
+</head>
+
+<body class="text-center">
+
+    <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
+
+        @if (TempData["error"] != null)
+    {
+        <p>@TempData["error"]</p>
+}
+
+        @using (Html.BeginForm("SignIn", "Prihlaseni", FormMethod.Post, new { @class = "form-signin" }))
+    {
+        <h2 class="form-signin-heading">Přihlášení</h2>
+        <label for="inputEmail" class="sr-only">Login</label>
+        <input type="text" id="inputEmail" class="form-control" placeholder="Login" name="login">
+        <label for="inputPassword" class="sr-only">Heslo</label>
+        <input type="password" id="inputPassword" name="heslo" class="form-control" placeholder="Heslo">
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Přihlásit</button>
+
+
+}
+    </div>
+</body>
+</html>
+

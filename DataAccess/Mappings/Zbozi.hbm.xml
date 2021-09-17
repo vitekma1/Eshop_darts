@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="DataAccess" namespace="DataAccess.Model">
+
+  <class name="Zbozi" table="Zbozi">
+    <id name="Id" column="Id">
+      <generator class="native" />
+    </id>
+    <property name="Nazev" column="Nazev" />
+    <property name="Popis" column="Popis" />
+    <property name="Cena" column="Cena" />
+    <property name="Obrazek" column="Obrazek" />
+    <property name="Pocet" column="Pocet" />
+    <many-to-one name="Druh" column="Druh_id" foreign-key="Druh_id" />
+
+
+
+  </class>
+
+</hibernate-mapping>

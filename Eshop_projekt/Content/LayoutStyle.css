@@ -1,0 +1,16 @@
+﻿body {
+    background-image: url(http://www.desktop-screens.com/data/out/30/2743895-darts-wallpapers.jpg);
+    height: 100%;
+    
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.menu {
+    background-color:black;
+}
+.menu_slidebar {
+    background-image: url(https://s7d2.scene7.com/is/image/homedepotcanada/p_1000762494.jpg?context=bWFzdGVyfGltYWdlc3wzNjE5NDZ8aW1hZ2UvanBlZ3xpbWFnZXMvaDVmL2gxYy8xMzM4MDM0MjA4NzcxMC5qcGd8NWViYjk3OTNhMmFjNWU5ZTQ5YjM3YjRkYmEwZTk2ZTY3Mjg0ZjllMTA5YzNjYjNkNTNmNDk5ZjA3MTRiN2Y4Yg?$plpProduct$);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+

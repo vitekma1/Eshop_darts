@@ -1,0 +1,63 @@
+﻿@using DataAccess.Model
+@using DataAccess.Dao;
+@model IList<Reklamace>
+@{
+    ViewBag.Title = "IndexPracovnik";
+}
+
+<h2>Přehled reklamací</h2>
+@if (TempData["message-success-reklamaceDelete"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["message-success-reklamaceDelete"]
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    </div>
+}
+    <div class=" bg-white p-1">
+        @foreach (Reklamace reklamace in Model)
+    {
+        <div>
+            <span class="font-weight-bold">Reklamace: #@reklamace.Id</span>
+        </div>
+        <div class=" border border-dark m-2 p-2">
+
+            <div>
+                <span class="font-weight-bold">Login:</span> @reklamace.eshopUzivatel.Login
+            </div>
+            <div>
+                <span class="font-weight-bold">Jméno:</span> @reklamace.eshopUzivatel.Jmeno
+            </div>
+            <div>
+                <span class="font-weight-bold">Přijmení:</span> @reklamace.eshopUzivatel.Prijmeni
+            </div>
+            <div>
+                <span class="font-weight-bold">Adresa:</span> @reklamace.eshopUzivatel.Adresa
+            </div>
+            <div>
+                <span class="font-weight-bold">PSČ:</span> @reklamace.eshopUzivatel.PSC
+            </div>
+            <div>
+                <span class="font-weight-bold">Důvod: </span>@reklamace.Popis
+            </div>
+            <div>
+                <span class="font-weight-bold">Číslo objednávaného produktu: </span>@reklamace.objednavka.Id
+            </div>
+            <div>
+                <span class="font-weight-bold">Název zboží: </span>@reklamace.objednavka.zbozi.Nazev
+            </div>
+            <div>
+                <span class="font-weight-bold">Počet kusů: </span>@reklamace.objednavka.Ks
+            </div>
+            <div>
+                <span class="font-weight-bold">Cena za 1ks: </span>@reklamace.objednavka.zbozi.Cena
+            </div>
+            <div>
+                <span class="font-weight-bold">Cena objednávky: </span>@reklamace.objednavka.Cena
+            </div>
+            @Html.ActionLink("Smazat", "Delete", "Reklamace", new { id = reklamace.Id }, new { onclick = "return confirm('prejete si opravdu smazat reklamaci?" + "');" })
+
+
+        </div>
+}
+
+    </div>

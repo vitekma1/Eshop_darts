@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="DataAccess" namespace="DataAccess.Model">
+
+  <class name="Reklamace" table="Reklamace" lazy="false">
+    <id name="Id" column="Id">
+      <generator class="native" />
+    </id>
+    <property name="Popis" column="Popis" />
+   
+    <many-to-one name="eshopUzivatel" column="EshopUzivatelId" foreign-key="EshopUzivatelId" />
+    <many-to-one name="objednavka" column="ObjednavkaId" foreign-key="ObjednavkaId" />
+
+  </class>
+
+</hibernate-mapping>

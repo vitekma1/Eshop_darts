@@ -1,0 +1,81 @@
+﻿@model DataAccess.Model.Zbozi
+@{
+    ViewBag.Title = "Edit";
+
+}
+
+
+<div class="container bg-white card-body">
+
+    <h2>@Model.Nazev - editace</h2>
+    @Html.ValidationSummary()
+
+    @using (Html.BeginForm("Update", "Zbozi", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
+    {
+        @Html.HiddenFor(x => x.Id)
+        @Html.HiddenFor(x => x.Obrazek)
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Nazev zboží</label>
+            <div class="col-sm-10">
+                @Html.TextBoxFor(x => x.Nazev, new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.Nazev)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Cena zboží</label>
+            <div class="col-sm-10">
+                @Html.TextBoxFor(x => x.Cena, new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.Cena)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Pocet kusů na skladě</label>
+            <div class="col-sm-10">
+                @Html.TextBoxFor(x => x.Pocet, new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.Pocet)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Obrazek</label>
+            <div class="col-sm-10">
+                @Html.TextBoxFor(x => x.Obrazek, new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.Obrazek)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Druh zboží</label>
+            <div class="col-sm-10">
+                @Html.DropDownList("Druh_id", new SelectList(ViewBag.Druhy, "Id", "Nazev", Model.Druh.Id), new { @class = "form-control" })
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Popis</label>
+            <div class="col-sm-10">
+                @Html.TextBoxFor(x => x.Popis, new { @class = "form-control formatedtext" })
+                @Html.ValidationMessageFor(x => x.Popis)
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-default">Upravit zboží</button>
+            </div>
+        </div>
+
+
+
+    }
+</div>
+
+
+
+
+

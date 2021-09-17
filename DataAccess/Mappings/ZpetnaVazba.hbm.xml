@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="DataAccess" namespace="DataAccess.Model">
+
+  <class name="ZpetnaVazba" table="ZpetnaVazba" lazy="false">
+    <id name="Id" column="Id">
+      <generator class="native" />
+    </id>
+    <property name="Zprava" column="Zprava" />
+   
+    <many-to-one name="eshopUzivatel" column="Uzivatel_Id" foreign-key="Uzivatel_Id" />
+
+  </class>
+
+</hibernate-mapping>

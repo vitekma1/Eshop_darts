@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="DataAccess" namespace="DataAccess.Model">
+
+  <class name="EshopUzivatel" table="eshop_uzivatel" lazy="false">
+    <id name="Id" column="uzivatel_id">
+      <generator class="native" />
+    </id>
+    <property name="Jmeno" column="jmeno" />
+    <property name="Prijmeni" column="prijmeni" />
+    <property name="Login" column="login" />
+    <property name="Heslo" column="heslo" />
+    <property name="Adresa" column="adresa" />
+    <property name="PSC" column="psc" />
+    <property name="Email" column="email" />
+    <many-to-one name="Role" column="role_id" foreign-key="role_id" />
+
+  </class>
+
+</hibernate-mapping>

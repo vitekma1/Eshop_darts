@@ -1,0 +1,115 @@
+﻿@using DataAccess.Model
+@model IList<Zbozi>
+@{
+    Layout = @"~\Areas\Admin\Views\Shared\_Layout.cshtml";
+    
+
+}
+
+<div class="album py-5 bg-light">
+    <div class="container">
+        <h2>Přehled zboží</h2>
+        <div class="form-inline my-2 my-lg-0">
+            @using (Html.BeginForm("Search", "Zbozi"))
+            {
+                <input type="text" class="form-control mr-sm-2 shadow-lg" placeholder="Vyhledat zbozi" name="phrase">
+                <input value="Vyhledat" class="btn btn-light shadow-lg border-dark m-3" type="submit" />
+            }
+
+            <div class="col-10">
+                <h3>Kategorie zboží </h3>
+            </div>
+            <div class="col-10">
+                <div class="panel-body">
+                    @if (ViewBag.Categories != null)
+        {
+            foreach (Zbozi_druh zb in ViewBag.Categories)
+            {
+
+
+                <a class="btn btn-sm btn-outline-secondary" href="@Url.Action("Category", "Zbozi", new { id=zb.Id})">@zb.Nazev</a>
+
+}
+}
+                </div>
+            </div>
+                    <div class="row">
+
+                        @foreach (Zbozi zbozi in Model)
+                        {
+                            if (zbozi.Pocet > 0)
+                            {
+
+                                <div class="col-md-4">
+                                    <div class="card mb-4 box-shadow">
+                                        <img class="card-img-top" src=@zbozi.Obrazek height="350">
+                                        <div class="card-body">
+                                            <p class="card-text">@zbozi.Nazev  <br> @zbozi.Cena Kč </p>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div class="btn-group">
+                                                    <a class="btn btn-sm btn-outline-secondary" href="@Url.Action("Detail", "Zbozi", new {id = zbozi.Id })">Detail</a>
+                                                    <div class="btn btn-sm btn-outline-secondary">
+                                                        @Html.ActionLink("Upravit", "Edit", "Zbozi", new { id = zbozi.Id }, null)
+                                                    </div>
+                                                    <div class="btn btn-sm btn-outline-secondary">
+
+                                                        @Html.ActionLink("Vyřadit", "Delete", "Zbozi", new { id = zbozi.Id }, new { onclick = "return confirm('prejete si opravdu smazat zboží " + zbozi.Nazev + "?" + "');" })
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+
+                            if (zbozi.Pocet == 0)
+                            {
+                                <div class="col-md-4">
+                                    <div class="card mb-4 box-shadow">
+                                        <h2>Toto zboží není v nabídce</h2>
+                                        <img class="card-img-top" src=@zbozi.Obrazek width="200" height="288">
+                                        <div class="card-body">
+                                            <p class="card-text">@zbozi.Nazev  <br> @zbozi.Cena Kč </p>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div class="btn-group">
+                                                    <a class="btn btn-sm btn-outline-secondary" href="@Url.Action("Detail", "Zbozi", new {id = zbozi.Id })">Podrobnosti</a>
+                                                    <div class="btn btn-sm btn-outline-secondary">
+                                                        @Html.ActionLink("Upravit", "Edit", "Zbozi", new { id = zbozi.Id }, null)
+                                                    </div>
+
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+
+                    </div>
+               
+                <div>
+                    @if (ViewBag.Pages != null)
+                    {
+
+
+                        <ul class="pagination">
+                            @for (int i = 1; i <= ViewBag.Pages; i++)
+                            {
+                                <li class="@(ViewBag.CurrentPage == i ? "active" : "") border border-dark p-2"><a href="@Url.Action("Index", "Zbozi", new { page = i})">@i</a></li>
+
+                            }
+                        </ul>
+
+                    }
+
+                    <a class="p-2 text-white shadow-lg bg-dark float-right" href="@Url.Action("Create" , "Zbozi")">Vytvořit novou položku zboží</a>
+
+                </div>
+            
+        </div>
+    </div>
+</div>

@@ -1,0 +1,110 @@
+﻿@using DataAccess.Model
+@using DataAccess.Dao;
+@model IList<Objednavka>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class=" border border-dark m-2 p-2">
+    <h2>Obsah košíku</h2>
+    @{ int price = 0;}
+    @{string username;
+        username = User.Identity.Name;
+        EshopUzivatelDao eshopUzivatelDao = new EshopUzivatelDao();
+        EshopUzivatel eshopUzivatel = eshopUzivatelDao.GetByLogin(username);}
+    @if (TempData["success-message-objednavka"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @TempData["success-message-objednavka"]
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        </div>
+    }
+    @if (TempData["success-message-objednavkaZrusena"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @TempData["success-message-objednavkaZrusena"]
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        </div>
+    }
+    @foreach (Objednavka objednavka in Model)
+    {
+        if (objednavka.Platnost == 0)
+        {
+
+
+            if (objednavka.eshopUzivatel.Login == eshopUzivatel.Login)
+            {
+                <div class=" border border-dark m-2 p-2">
+                    <span class="font-weight-bold">
+                        Číslo objednaného produktu #@objednavka.Id
+                    </span>
+
+                    <div>
+                        <span class="font-weight-bold">Název zboží: </span> @objednavka.zbozi.Nazev
+                    </div>
+                    <span class="font-weight-bold"> Cena za @objednavka.Ks kus(ů):</span>  @objednavka.Cena Kč
+                    <div>
+                        <span class="font-weight-bold"> Popis:</span> @objednavka.zbozi.Popis
+
+                    </div>
+                    <div>
+                        <span class="font-weight-bold"> Počet kusů:</span> @objednavka.Ks
+
+                    </div>
+                </div>
+                if (objednavka.Ks < objednavka.zbozi.Pocet)
+                {
+                    <a class="btn btn-sm btn-outline-secondary" href="@Url.Action("PridatKs", "Objednavka", new { id = objednavka.Id, ks = objednavka.Ks + 1})">Přidat kus</a>
+                }
+                if (objednavka.Ks > 1)
+                {
+                    <a class="btn btn-sm btn-outline-secondary" href="@Url.Action("PridatKs", "Objednavka", new { id = objednavka.Id, ks = objednavka.Ks - 1})">Odebrat kus</a>
+
+                }
+                <a class="btn btn-sm btn-outline-secondary" href="@Url.Action("Smazat", "Objednavka", new { id = objednavka.Id, uzivatel = eshopUzivatel.Login})">Odebrat z objednávky</a>
+
+                price = price + objednavka.Cena;
+            }
+        }
+    }
+    Celková cena: @price Kč
+</div>
+<a class="btn btn-sm btn-outline-secondary" href="@Url.Action("Objednani", "Objednavka", new { id = eshopUzivatel.Id})">Odeslat odbjednávku</a>
+<a class="btn btn-sm btn-outline-secondary" href="@Url.Action("Zruseni", "Objednavka", new { id = eshopUzivatel.Id})">Zrušit celou objednávku</a>
+<div class=" border border-dark m-2 p-2 bg-white">
+
+    <h2>
+        Předchozí objednávky
+    </h2>
+    @foreach (Objednavka objednavka in Model)
+    {
+        if ((objednavka.Platnost == 1) || (objednavka.Platnost == 2))
+        {
+
+
+            if (objednavka.eshopUzivatel.Login == eshopUzivatel.Login)
+            {
+                <div class=" border border-dark m-2 p-2">
+                    <span class="font-weight-bold">
+                        Číslo objednaného produktu #@objednavka.Id
+                    </span>
+
+                    <div>
+                        <span class="font-weight-bold">Název zboží: </span> @objednavka.zbozi.Nazev
+                    </div>
+                    <span class="font-weight-bold"> Cena:</span>  @objednavka.Cena Kč
+                    <div>
+                        <span class="font-weight-bold"> Popis:</span> @objednavka.zbozi.Popis
+
+                    </div>
+                    <div>
+                        <span class="font-weight-bold"> Počet kusů:</span> @objednavka.Ks
+
+                    </div>
+                </div>
+
+            }
+        }
+    }
+</div>

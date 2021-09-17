@@ -1,0 +1,28 @@
+﻿@using DataAccess.Model
+@using DataAccess.Dao;
+@model IList<ZpetnaVazba>
+@{
+    ViewBag.Title = "IndexPracovnik";
+}
+
+<h2>Přehled zpráv od uživatelů</h2>
+@if (TempData["success-message-hodnoceniDelete"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["success-message-hodnoceniDelete"]
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    </div>
+}
+<div class=" bg-white p-1" >
+@foreach (ZpetnaVazba zpetnaVazba in Model)
+{
+    <div class=" border border-dark m-2 p-2">
+        <div class="font-weight-bold">
+            @zpetnaVazba.eshopUzivatel.Login
+        </div>
+        @zpetnaVazba.Zprava
+        @Html.ActionLink("Smazat", "Delete", "ZpetnaVazba", new { id = zpetnaVazba.Id }, new { onclick = "return confirm('Opravdu chcete zprávu smazat?" + "');" })
+
+    </div>
+}
+</div>

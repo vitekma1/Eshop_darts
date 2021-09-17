@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="DataAccess" namespace="DataAccess.Model">
+
+  <class name="Objednavka" table="Objednavka" lazy="false">
+    <id name="Id" column="Id">
+      <generator class="native" />
+    </id>
+    <property name="Cena" column="Cena" />
+    <property name="Platnost" column="Platnost" />
+    <property name="Ks" column="Ks" />
+    <many-to-one name="eshopUzivatel" column="Uzivatel_Id" foreign-key="Uzivatel_Id" />
+    <many-to-one name="zbozi" column="Zbozi_Id" foreign-key="Zbozi_Id" />
+
+  </class>
+
+</hibernate-mapping>

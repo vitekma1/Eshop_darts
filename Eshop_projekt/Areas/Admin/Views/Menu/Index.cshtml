@@ -1,0 +1,15 @@
+﻿@model DataAccess.Model.EshopUzivatel
+@{
+    ViewBag.Title = "Index";
+    Layout = null;
+}
+
+@if (Model.Role.Identifikator == "zamestnanec")
+{
+    <li><a href="@Url.Action("Index","Zbozi")">Sprava zbozi</a></li>
+}
+else if (Model.Role.Identifikator == "uzivatel")
+{
+    <li><a href="@Url.Action("Index","Zbozi")">Zbozi</a></li>
+}
+

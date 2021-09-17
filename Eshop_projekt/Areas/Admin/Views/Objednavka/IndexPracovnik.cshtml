@@ -1,0 +1,111 @@
+﻿@using DataAccess.Model
+@using DataAccess.Dao;
+@model IList<Objednavka>
+
+@{
+    ViewBag.Title = "IndexPracovnik";
+
+}
+
+
+<div class=" border border-dark m-2 p-2 bg-white">
+    <h2>Aktivní objednávky</h2>
+
+    <div class="panel">
+
+    </div>
+    <div class="border-dark bg-white">
+        @foreach (Objednavka objednavka in Model)
+    {
+
+        if (objednavka.Platnost == 1)
+        {
+
+
+        <div class=" border border-dark m-2 p-2">
+            <span class="font-weight-bold">
+                Číslo objednaného produktu #@objednavka.Id
+            </span>
+            <div>
+                <div>
+                    <span class="font-weight-bold">Jméno zákazníka: </span> @objednavka.eshopUzivatel.Login
+                </div>
+                <div>
+                </div>
+
+                <div>
+                    <span class="font-weight-bold">Název zboží: </span> @objednavka.zbozi.Nazev
+                </div>
+                <div>
+                    <span class="font-weight-bold"> Cena:</span>  @objednavka.Cena Kč
+                </div>
+                <div>
+                    <span class="font-weight-bold"> Počet kusů:</span>  @objednavka.Ks 
+                </div>
+            </div>
+            <a class="btn btn-sm btn-outline-secondary" href="@Url.Action("Odeslano", "Objednavka", new { id = objednavka.Id})">Zařadit mezi odeslané</a>
+            <a class="btn btn-sm btn-outline-secondary" href="@Url.Action("Sort", "Objednavka", new { login = objednavka.eshopUzivatel.Login})">Náhled objednávky</a>
+        </div>
+            
+
+    }
+
+
+
+}
+    </div>
+    <div class="border-dark">
+        <h2>Vyřízené objednávky</h2>
+        @foreach (Objednavka objednavka in Model)
+    {
+
+        if (objednavka.Platnost == 2)
+        {
+
+
+            <div class=" border border-dark m-2 p-2">
+                <span class="font-weight-bold">
+                    Číslo objednaného produktu #@objednavka.Id
+                </span>
+                <div>
+                    <div>
+                        <span class="font-weight-bold">Jméno zákazníka: </span> @objednavka.eshopUzivatel.Login
+                    </div>
+                    <div>
+                    </div>
+
+                    <div>
+                        <span class="font-weight-bold">Název zboží: </span> @objednavka.zbozi.Nazev
+                    </div>
+                    <div>
+                        <span class="font-weight-bold"> Cena:</span>  @objednavka.Cena Kč
+                    </div>
+                    <div>
+                        <span class="font-weight-bold"> Jméno:</span>  @objednavka.eshopUzivatel.Jmeno
+                    </div>
+                    <div>
+                        <span class="font-weight-bold"> Přijmení:</span>  @objednavka.eshopUzivatel.Prijmeni
+                    </div>
+                    <div>
+                        <span class="font-weight-bold"> PSČ:</span>  @objednavka.eshopUzivatel.PSC
+                    </div>
+                    <div>
+                        <span class="font-weight-bold"> Adresa:</span>  @objednavka.eshopUzivatel.Adresa
+                    </div>
+                    <div>
+                        <span class="font-weight-bold"> Email:</span>  @objednavka.eshopUzivatel.Email
+                    </div>
+                    <div>
+                        <span class="font-weight-bold"> Počet kusů:</span>  @objednavka.Ks 
+                    </div>
+                </div>
+            </div>
+           
+
+    }
+
+
+
+}
+
+    </div>

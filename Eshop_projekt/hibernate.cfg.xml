@@ -1,0 +1,14 @@
+﻿
+<hibernate-configuration xmlns="urn:nhibernate-configuration-2.2">
+  <session-factory  name="NHibernate.Test">
+    <property name="connection.driver_class">NHibernate.Driver.SqlClientDriver</property>
+    <property name="connection.connection_string">
+      Data Source=MATĚJ\SQLEXPRESS;initial catalog=eshop;Trusted_Connection=Yes;
+    </property>
+    <property name="dialect">NHibernate.Dialect.MsSql2008Dialect</property>
+    <mapping assembly="DataAccess"/>
+  </session-factory>
+
+</hibernate-configuration>
+
+
